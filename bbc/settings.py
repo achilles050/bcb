@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'bbc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db',
+        'NAME': 'dbdb',
         'HOST': '',
         'USER': 'root',
         'PASSWORD': '',

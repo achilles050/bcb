@@ -7,17 +7,17 @@ from django.views.generic import CreateView, DetailView, UpdateView, ListView, V
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.decorators import permission_required
 from uuid import uuid4
 from datetime import timedelta, datetime, time, date
 import calendar
 
+from . import choice
 from . import form
 from booking import models as booking_models
 from booking import book
 from member import models as member_models
 from django.contrib.auth.models import User
+from booking.models import AllCourtInfo, EachCourtInfo
 
 
 class LoginForm(forms.Form):
@@ -89,7 +89,7 @@ class SettingHome(PermissionRequiredMixin, View):
     login_url = '/adminsite/login/'
 
     def get(self, request):
-        court_number = booking_models.EachCourtInfo.objects.values_list(
+        court_number = EachCourtInfo.objects.values_list(
             "court_number", flat=True).order_by('court_number')
         return render(request, 'adminsite/setting_home.html', {'court_number': court_number})
 
@@ -99,7 +99,7 @@ class AllCourtSetting(PermissionRequiredMixin, View):
     login_url = '/adminsite/login/'
 
     def get(self, request):
-        query_obj = booking_models.AllCourtInfo.objects.values().all()[0]
+        query_obj = AllCourtInfo.objects.values().all()[0]
         myform = form.AllCourtForm(query_obj)
         return render(request, 'adminsite/setting_allcourt.html', {'form': myform})
 
@@ -136,6 +136,10 @@ class AdminBooking(PermissionRequiredMixin, View):
         data = {'date': mydate, 'from_time': from_time,
                 'to_time': to_time}
         myform = form.BookingForm(initial=data)
+        myform.fields['date'].choices = choice.date_choices
+        myform.fields['from_time'].choices = choice.time_choices
+        myform.fields['to_time'].choices = choice.time_choices2
+        myform.fields['court'].choices = choice.court_choices
         return render(request, 'adminsite/booking.html', {'form': myform})
 
     def post(self, request):
@@ -155,7 +159,7 @@ class AdminBooking(PermissionRequiredMixin, View):
             tel = data['tel']
             email = data['email']
 
-            q_allcourtinfo = booking_models.AllCourtInfo.objects.all()[0]
+            q_allcourtinfo = AllCourtInfo.objects.all()[0]
             booking_date = datetime.strptime(str_date, '%Y-%m-%d').date()
 
             dt_now = timezone.make_aware(datetime.now())
@@ -364,7 +368,8 @@ class IncomeHome(PermissionRequiredMixin, View):
     login_url = '/adminsite/login/'
 
     def get(self, request):
-        myform = form.IncomeForm
+        myform = form.IncomeForm()
+        myform.fields['year'].choices = choice.year_choices
         return render(request, 'adminsite/income_home.html', {'form': myform})
 
 
@@ -413,7 +418,7 @@ class UsageHome(PermissionRequiredMixin, View):
 
     def get(self, request):
         myform = form.UsageForm()
-        # myform.fields['year'].choices = [(1, 1), (2, 2)]
+        myform.fields['year_month'].choices = choice.yearmonth_choices
         return render(request, 'adminsite/usage_home.html', {'form': myform})
 
 
