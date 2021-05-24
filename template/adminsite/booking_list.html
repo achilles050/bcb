@@ -1,0 +1,14 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin List Booking Page {% endblock %}
+{% block content %}
+<h2>All Booking</h2>
+<ul>
+    {% for booking in object_list %}
+        <li>
+            <a href="{% url 'booking_detail' pk=booking.pk %}">
+                {{ booking.bookingid }} {{booking.booking_datetime}} {{booking.name}}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

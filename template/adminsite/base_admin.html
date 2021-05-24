@@ -1,0 +1,27 @@
+<html>
+    <header>
+        <title>{% block title %}{% endblock %}</title>
+        <style>
+            form {
+                text-align: center;
+            }
+            table.center {
+                width: auto;
+                margin-left:auto; 
+                margin-right:auto;
+                text-align: center;
+            }
+            tr {
+                vertical-align: top;
+                text-align: left;
+            }
+            
+        </style>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    </header>
+    <body>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

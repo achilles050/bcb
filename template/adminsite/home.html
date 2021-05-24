@@ -1,0 +1,16 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin Home Page {% endblock %}
+{% block content %}
+<h1>
+<a href="{% url 'setting_home' %}">Court Setting</a>
+<a href="{% url 'admin_booking' %}">Booking</a>
+<a href="{% url 'booking' %}">Booking History</a>
+<a href="{% url 'member' %}">Member</a>
+<a href="{% url 'check_payment' %}">Check Payment</a>
+<a href="{% url 'check_refund' %}">Check Refund</a>
+<a href="{% url 'income_home' %}">Income</a>
+<a href="{% url 'usage_home' %}">Usage</a>
+<a href="{% url 'admin_register' %}">Register</a>
+
+</h1>
+{% endblock %}

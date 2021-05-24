@@ -1,0 +1,12 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin Booking Detail Page {% endblock %}
+{% block content %}
+<h2>Booking</h2>
+<form method="post">
+    <table class='center'>
+    {% csrf_token %} 
+    {{ form.as_table }} 
+    </table>
+    <input type="submit" value="Save"> 
+</form>
+{% endblock %}

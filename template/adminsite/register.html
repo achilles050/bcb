@@ -1,0 +1,18 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Register Page For admin only {% endblock %}
+{% block content %}
+  <form method="post" class="center" action="{% url 'admin_register' %}">
+    {% csrf_token %}
+    <table align="center">
+      <tr>
+        <td>{{ form.username.label_tag }}</td>
+        <td>{{ form.username }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.password.label_tag }}</td>
+        <td>{{ form.password }}</td>
+      </tr>
+    </table>
+    <input type="submit" value="register" />
+  </form>
+{% endblock %}

@@ -1,0 +1,10 @@
+Hi {{ user }},
+Thank you for registering !
+
+You can verify account at {{ protocol }}://{{ domain }}{% url 'activate_email' uidb64=uid token=token %}  .
+
+Happy conferencing,
+Badminton Court Booking
+Contact us: org@bcb.info
+
+If you think, it's not you, then just ignore this email. 

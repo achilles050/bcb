@@ -1,0 +1,14 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin List Member Page {% endblock %}
+{% block content %}
+<h2>All Member</h2>
+<ul>
+    {% for member in object_list %}
+        <li>
+            <a href="{% url 'member_detail' pk=member.pk %}">
+                {{ member.first_name }} {{member.last_name}} {{member.virtualid}}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

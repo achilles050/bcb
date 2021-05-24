@@ -1,0 +1,25 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        Booking detail
+        <table>
+            <tr>
+                <td>Booking Datetime</td>
+                <td>Court</td>
+            </tr>
+            {% for obj in object %}
+            <tr>
+                <td>
+                    {{ obj.booking_datetime}}
+                </td>
+                <td>
+                    {{ obj.court.court_number}}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    Your PaymentID: {{paymentid}}
+    </body>
+</html>

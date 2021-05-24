@@ -1,0 +1,48 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin Check Refund Page {% endblock %}
+{% block content %}
+<h1>Admin Check Refund Page</h1>
+<form action="{% url 'check_refund' %}" method="POST">
+    <table>
+        <tr>
+            <td>RefundID</td>
+            <td>DateTime</td>
+            <td>Price</td>
+            <td>BankID</td>
+            <td>BankName</td>
+            <td></td>
+            <td>State</td>
+        </tr>
+        {% for refund in form %}
+        <tr>
+            <td>
+                {{ refund.refundid }}
+            </td>
+            <td>
+                {{ refund.timestamp }}
+            </td>
+            <td>
+                {{ refund.price }} baht
+            </td>
+            <td>
+                {{ refund.bank_acc_name }}
+            </td>
+            <td>
+                {{ refund.bank_acc_id }}
+            </td>
+            <td>
+                    <button type="submit" formmethod="post" name="check" value="{{ refund.refundid }}">Check</button>
+                    <button type="submit" formmethod="post" name="uncheck" value="{{ refund.refundid }}">Uncheck</button>
+            </td>
+            <td>
+                {% if not refund.is_refunded %}
+                    Uncheck
+                {% else %}
+                    Checked
+                {% endif %}
+            </td>
+        </tr>    
+        {% endfor %}
+    </table>
+</form>
+{% endblock %}

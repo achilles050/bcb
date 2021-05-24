@@ -1,0 +1,12 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin Booking Page for walkthough booking {% endblock %}
+{% block content %}
+<h1>Admin Booking Page for walkthough booking</h1>
+<form method="post" > 
+    <table class='center'>
+    {% csrf_token %} 
+    {{ form.as_table }} 
+    </table>
+    <input type="submit" value="Save"> 
+</form>
+{% endblock %}

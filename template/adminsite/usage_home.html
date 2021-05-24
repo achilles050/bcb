@@ -1,0 +1,9 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Choose Year {% endblock %}
+{% block content %}
+<h1>Choose Year</h1>
+<form method="GET" action="{% url 'usage' %}" class="center">
+  {{form}}
+  <input type="submit" value="Submit">
+</form>
+{% endblock %}
