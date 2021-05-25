@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django import forms
 from django.urls import reverse
 from django.http.response import JsonResponse
-from django.views.generic import CreateView, DetailView, UpdateView, ListView, View
+from django.views.generic import CreateView, DetailView, UpdateView, ListView, DeleteView, View
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -14,10 +14,10 @@ import calendar
 from . import choice
 from . import form
 from booking import models as booking_models
+from booking.models import AllCourtInfo, EachCourtInfo
 from booking import book
 from member import models as member_models
 from django.contrib.auth.models import User
-from booking.models import AllCourtInfo, EachCourtInfo
 
 
 class LoginForm(forms.Form):
@@ -89,7 +89,7 @@ class SettingHome(PermissionRequiredMixin, View):
     login_url = '/adminsite/login/'
 
     def get(self, request):
-        court_number = EachCourtInfo.objects.values_list(
+        court_number = booking_models.EachCourtInfo.objects.values_list(
             "court_number", flat=True).order_by('court_number')
         return render(request, 'adminsite/setting_home.html', {'court_number': court_number})
 
@@ -119,6 +119,29 @@ class EachCourtSetting(PermissionRequiredMixin, UpdateView):
     form_class = form.EachCourtForm
     model = booking_models.EachCourtInfo
     template_name = 'adminsite/setting_eachcourt.html'
+    slug_field = 'court_number'
+    slug_url_kwarg = 'court_number'
+    success_url = '/adminsite/setting/'
+
+
+class AddCourt(PermissionRequiredMixin, CreateView):
+    permission_required = 'is_staff'
+    login_url = '/adminsite/login/'
+
+    form_class = form.EachCourtForm
+    model = booking_models.EachCourtInfo
+    template_name = 'adminsite/setting_eachcourt.html'
+    slug_field = 'court_number'
+    slug_url_kwarg = 'court_number'
+    success_url = '/adminsite/setting/'
+
+
+class DeleteCourt(PermissionRequiredMixin, DeleteView):
+    permission_required = 'is_staff'
+    login_url = '/adminsite/login/'
+
+    model = booking_models.EachCourtInfo
+    template_name = 'adminsite/setting_eachcourt_delete.html'
     slug_field = 'court_number'
     slug_url_kwarg = 'court_number'
     success_url = '/adminsite/setting/'
@@ -159,7 +182,7 @@ class AdminBooking(PermissionRequiredMixin, View):
             tel = data['tel']
             email = data['email']
 
-            q_allcourtinfo = AllCourtInfo.objects.all()[0]
+            q_allcourtinfo = booking_models.AllCourtInfo.objects.all()[0]
             booking_date = datetime.strptime(str_date, '%Y-%m-%d').date()
 
             dt_now = timezone.make_aware(datetime.now())
@@ -288,6 +311,29 @@ class DetailMember(PermissionRequiredMixin, UpdateView):
     success_url = '/adminsite/member/'
 
 
+class ListGroup(ListView):
+    permission_required = 'is_staff'
+    login_url = '/adminsite/login/'
+
+    model = member_models.Member
+    template_name = 'adminsite/group.html'
+
+    def get_queryset(self):
+        group = member_models.Group.objects.all()
+        return group
+
+
+class DetailGroup(PermissionRequiredMixin, UpdateView):
+    permission_required = 'is_staff'
+    login_url = '/adminsite/login/'
+
+    # form_class = form.MemberForm
+    fields = ('__all__')
+    model = member_models.Group
+    template_name = 'adminsite/group_detail.html'
+    success_url = '/adminsite/group/'
+
+
 class CheckPayment(PermissionRequiredMixin, View):
     permission_required = 'is_staff'
     login_url = '/adminsite/login/'
@@ -368,7 +414,7 @@ class IncomeHome(PermissionRequiredMixin, View):
     login_url = '/adminsite/login/'
 
     def get(self, request):
-        myform = form.IncomeForm()
+        myform = form.IncomeForm
         myform.fields['year'].choices = choice.year_choices
         return render(request, 'adminsite/income_home.html', {'form': myform})
 

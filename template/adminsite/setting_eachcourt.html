@@ -1,7 +1,13 @@
 {% extends 'adminsite/base_admin.html' %}
 {% block title %} Admin Setting Court {{ form.court_number.value }} Page {% endblock %}
 {% block content %}
-<h1>Admin Setting Court {{ form.court_number.value }}</h1>
+
+{% if form.court_number.value is not None %}
+    <h1>Admin Setting Court {{ form.court_number.value }}</h1>
+{% else %}
+    <h1>Admin Add Court</h1>
+{% endif %}
+
 <form method="post">
     <table class='center'>
     {% csrf_token %} 
@@ -9,4 +15,10 @@
     </table>
     <input type="submit" value="Save"> 
 </form>
+{% if form.court_number.value is not None %}
+<center/>
+<a href="{% url 'delete_court' court_number=form.court_number.value %}">
+    Delete "Court id"
+</a>
+{% endif %}
 {% endblock %}

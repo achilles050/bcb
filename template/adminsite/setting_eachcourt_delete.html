@@ -1,0 +1,10 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin Delete Court {{ form.court_number.value }} Page {% endblock %}
+{% block content %}
+<h1>Admin Delete Court {{ form.court_number.value }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "Court {{ object.court_number }}"?</p>
+    <input type="submit" value="Confirm">
+</form>
+{% endblock %}

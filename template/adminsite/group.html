@@ -1,0 +1,14 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin List Group Page {% endblock %}
+{% block content %}
+<h2>All Group</h2>
+<ul>
+    {% for group in object_list %}
+        <li>
+            <a href="{% url 'group_detail' pk=group.pk %}">
+                {{ group.group_name }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

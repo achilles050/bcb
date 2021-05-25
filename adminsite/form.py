@@ -31,6 +31,7 @@ class AllCourtForm(forms.ModelForm):
         choices=[
             (timedelta(days=1), "1 day"),
             (timedelta(days=3), "3 days"),
+            (timedelta(days=5), "5 days"),
             (timedelta(days=7), "7 days"),
         ],
         label='Range personal booking'
@@ -44,6 +45,7 @@ class AllCourtForm(forms.ModelForm):
             (timedelta(minutes=10), "10 mins"),
             (timedelta(minutes=30), "30 mins"),
             (timedelta(hours=1), "1 hour"),
+            (timedelta(days=1), "1 day"),
         ],
         label='Payment after booking for member'
     )
@@ -76,6 +78,7 @@ class AllCourtForm(forms.ModelForm):
         choices=[
             (timedelta(days=1), "1 day"),
             (timedelta(days=3), "3 days"),
+            (timedelta(days=5), "5 day"),
             (timedelta(days=7), "7 days"),
         ],
         label='Refund before ... for member'
@@ -89,6 +92,7 @@ class AllCourtForm(forms.ModelForm):
             (timedelta(minutes=10), "10 mins"),
             (timedelta(minutes=30), "30 mins"),
             (timedelta(hours=1), "1 hour"),
+            (timedelta(days=1), "1 day"),
         ],
         label='Payment after booking for member in Festival time'
     )
@@ -97,6 +101,7 @@ class AllCourtForm(forms.ModelForm):
         choices=[
             (timedelta(days=1), "1 day"),
             (timedelta(days=3), "3 days"),
+            (timedelta(days=5), "5 day"),
             (timedelta(days=7), "7 days"),
         ],
         label='Refund before ... for member in Festival time'

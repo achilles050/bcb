@@ -6,5 +6,6 @@
 {% for id in court_number%}
     <a href="{% url 'eachcourt_setting' court_number=id %}">Court {{id}}</a>
 {% endfor %}
+<a href="{% url 'add_court' %}">Add New Court</a>
 </h1>
 {% endblock %}
