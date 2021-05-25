@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import smtplib
 
+import django_heroku
+import dj_database_url
+from decouple import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,7 +31,7 @@ SECRET_KEY = '6*23oj2o%)6s650*r)xw$ofe(tqv#!oeyui=c1z$1wf+$)d-1b'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
-                 'https://kittichat.github.io/']
+                 'https://kittichat.github.io/', '0.0.0.0']
 APPEND_SLASH = True
 # Application definition
 
@@ -58,6 +62,7 @@ MIDDLEWARE = [
     # CORS
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     # Disable CSRF
     'func.disable.DisableCSRF',
 ]
@@ -96,13 +101,27 @@ WSGI_APPLICATION = 'bbc.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'db_bcb',
+#         'HOST': '',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'OPTIONS': {
+#             'sql_mode': 'traditional',
+#         },
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_bcb',
-        'HOST': '',
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'sql6414819',
+        'HOST': 'sql6.freemysqlhosting.net',
+        'USER': 'sql6414819',
+        'PASSWORD': '1f4WjUCwaS',
+        'PORT': 3306,
         'OPTIONS': {
             'sql_mode': 'traditional',
         },
@@ -117,37 +136,7 @@ DATABASES = {
 # }
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME' : 'ite60010062_dbname',
-#         'HOST' : '172.18.0.4',
-#         'USER' : 'ite60010062_user',
-#         'PASSWORD' : '',
-#     }
-# }
 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'ite60010062_dbname',
-#         'USER': 'ite60010062_user',
-#         'PASSWORD': '123456',
-#         'HOST': '172.18.0.4',
-#         'PORT': '22',
-#     }
-# }
-
-# DATABASES = {
-#     'default': {
-#             'ENGINE': 'djongo',
-#             'NAME': 'bbc_db',
-#             'CLIENT': {
-#                 'host': 'mongodb+srv://myproject1:myproject1@cluster0.zo39s.gcp.mongodb.net/test?retryWrites=true&w=majority'
-#             },
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -185,9 +174,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
+
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 CORS_ORIGIN_ALLOW_ALL = False
@@ -230,3 +229,5 @@ EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = "no-reply@bookingbadmintoncourt.com"
 EMAIL_HOST_USER = 'bbctesting01'
 EMAIL_HOST_PASSWORD = 'bbc*6263'
+
+django_heroku.settings(locals())
