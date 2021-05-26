@@ -64,7 +64,7 @@ class Booking(models.Model):
     booking_datetime = models.DateTimeField()  # datetime booking
     exp_datetime = models.DateTimeField(null=True)  # for pay in this time
     refund_datetime = models.DateTimeField(
-        default=timezone.make_aware(datetime.now()))  # for pay in this time
+        default=timezone.now)  # for pay in this time
     price_normal = models.DecimalField(
         max_digits=5, decimal_places=2)  # each booking slot
     price_ds = models.DecimalField(
@@ -74,7 +74,7 @@ class Booking(models.Model):
     # 0 = booking, 1 = success, 2 = refunded, 3 = checkedPayment false(checking not found transaction)
     payment_state = models.IntegerField(default=0)
     timestamp = models.DateTimeField(
-        default=timezone.make_aware(datetime.now()))  # time now when booking
+        default=timezone.now)  # time now when booking
     # bookingid for identify your court was booked
     bookingid = models.CharField(max_length=32, unique=True)
     # identify your payment (can repeated)
@@ -91,7 +91,7 @@ class Payment(models.Model):
     paymentid = models.CharField(max_length=32, unique=True)
     # time when send slip for checking can be approximate
     timestamp = models.DateTimeField(
-        default=timezone.make_aware(datetime.now()))
+        default=timezone.now)
     pay = models.DecimalField(max_digits=10, decimal_places=2)
     member = models.ForeignKey(
         Member, on_delete=models.CASCADE, null=True, db_constraint=False)
@@ -116,6 +116,6 @@ class Refund(models.Model):
     bank_acc_name = models.CharField(
         max_length=20, null=True)  # customer banking name
     timestamp = models.DateTimeField(
-        default=timezone.make_aware(datetime.now()))  # for check is in refund time
+        default=timezone.now)  # for check is in refund time
     is_refunded = models.BooleanField(
         default=False)  # change when refund success

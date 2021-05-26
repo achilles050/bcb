@@ -225,15 +225,19 @@ CORS_ALLOW_CREDENTIALS = True
 
 # SESSION_COOKIE_SAMESITE = 'Strict'  # 'Lax'
 
-#SESSION_COOKIE_DOMAIN = ['http://127.0.0.1:3000', 'http://localhost:3000']
+SESSION_COOKIE_DOMAIN = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://kittichat.github.io']
 
 #SESSION_COOKIE_DOMAIN = 'http://localhost:8000'
 
 # SESSION_COOKIE_SAMESITE = None
 # CSRF_COOKIE_SAMESITE = None
 # CSRF_TRUSTED_ORIGINS = ['127.0.0.1:3000']
-CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = None
+SESSION_COOKIE_SAMESITE = None
 
 # DataFlair
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

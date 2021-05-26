@@ -125,6 +125,9 @@ class Login(APIView):
         auth = authenticate(username=username, password=password)
         if auth is not None:
             login(request, auth)
+            # res = JsonResponse({'username': username}, status=200)
+            # res.cookies['sessionid'].update({"samesite": "None"})
+            # return res
             return JsonResponse({'username': username}, status=200)
         else:
             return JsonResponse({'message': 'try again'}, status=404)
