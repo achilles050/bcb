@@ -155,7 +155,10 @@ class AdminBooking(PermissionRequiredMixin, View):
         dt_now = timezone.make_aware(datetime.now())
         mydate = dt_now.date()
         from_time = time(dt_now.hour)
-        to_time = time(dt_now.hour+1)
+        try:
+            to_time = time(dt_now.hour+1)
+        except:
+            to_time = time(dt_now.hour)
         data = {'date': mydate, 'from_time': from_time,
                 'to_time': to_time}
         myform = form.BookingForm(initial=data)
