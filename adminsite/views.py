@@ -414,7 +414,7 @@ class IncomeHome(PermissionRequiredMixin, View):
     login_url = '/adminsite/login/'
 
     def get(self, request):
-        myform = form.IncomeForm
+        myform = form.IncomeForm()
         myform.fields['year'].choices = choice.year_choices
         return render(request, 'adminsite/income_home.html', {'form': myform})
 

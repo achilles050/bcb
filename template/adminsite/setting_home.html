@@ -1,11 +1,13 @@
 {% extends 'adminsite/base_admin.html' %}
 {% block title %} Admin Setting Home Page {% endblock %}
 {% block content %}
+<ul>
 <h1>
-<a href="{% url 'allcourt_setting' %}">All Court Setting</a>
+<li/><a href="{% url 'allcourt_setting' %}">All Court Setting</a>
 {% for id in court_number%}
-    <a href="{% url 'eachcourt_setting' court_number=id %}">Court {{id}}</a>
+<li/><a href="{% url 'eachcourt_setting' court_number=id %}">Court {{id}}</a>
 {% endfor %}
-<a href="{% url 'add_court' %}">Add New Court</a>
+<li/><a href="{% url 'add_court' %}">Add New Court</a>
 </h1>
+</ul>
 {% endblock %}
