@@ -3,7 +3,7 @@ from datetime import timedelta, time, datetime
 
 
 def time_range():
-    info = booking_models.AllCourtInfo.objects.all()[0]
+    info = AllCourtInfo.objects.all()[0]
     if info.open_time.hour > info.close_time.hour:
         time_range = list(
             range(info.close_time.hour, info.open_time.hour))
