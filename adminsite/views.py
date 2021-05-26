@@ -168,6 +168,10 @@ class AdminBooking(PermissionRequiredMixin, View):
     def post(self, request):
         data = request.POST
         myform = form.BookingForm(data)
+        myform.fields['date'].choices = choice.date_choices
+        myform.fields['from_time'].choices = choice.time_choices
+        myform.fields['to_time'].choices = choice.time_choices2
+        myform.fields['court'].choices = choice.court_choices
 
         if myform.is_valid():
             booking_obj_list = list()
