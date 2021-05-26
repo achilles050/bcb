@@ -152,7 +152,7 @@ class AdminBooking(PermissionRequiredMixin, View):
     login_url = '/adminsite/login/'
 
     def get(self, request):
-        dt_now = datetime.now()
+        dt_now = timezone.make_aware(datetime.now())
         mydate = dt_now.date()
         from_time = time(dt_now.hour)
         to_time = time(dt_now.hour+1)
@@ -199,7 +199,7 @@ class AdminBooking(PermissionRequiredMixin, View):
             to_time = int(to_time[:2])
             booking_time = []
             for mytime in range(from_time, to_time):
-                if mytime in form.time_range():
+                if mytime in choice.time_range():
                     booking_time.append(mytime)
 
             for mytime in booking_time:

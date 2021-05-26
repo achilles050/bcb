@@ -2,6 +2,22 @@ from booking.models import AllCourtInfo, EachCourtInfo, Booking
 from datetime import timedelta, time, datetime
 
 
+def time_range():
+    info = booking_models.AllCourtInfo.objects.all()[0]
+    if info.open_time.hour > info.close_time.hour:
+        time_range = list(
+            range(info.close_time.hour, info.open_time.hour))
+        l = list(range(0, 24))
+        for value in time_range:
+            if value in l:
+                l.remove(value)
+        time_range = l
+    else:
+        time_range = list(range(info.open_time.hour, info.close_time.hour))
+
+    return time_range
+
+
 def time_choices():
     info = AllCourtInfo.objects.all()[0]
     if info.open_time.hour > info.close_time.hour:
