@@ -196,10 +196,10 @@ class AdminBooking(PermissionRequiredMixin, View):
             exp = q_allcourtinfo.payment_guest_duration
             dt_exp = dt_now + exp
 
-            # from_time = datetime.strptime(from_time, '%H:%M:%S').hour
-            # to_time = datetime.strptime(to_time, '%H:%M:%S').hour
-            from_time = int(from_time[:2])
-            to_time = int(to_time[:2])
+            from_time = datetime.strptime(from_time, '%H:%M:%S').hour
+            to_time = datetime.strptime(to_time, '%H:%M:%S').hour
+            # from_time = int(from_time[:2])
+            # to_time = int(to_time[:2])
             booking_time = []
             for mytime in range(from_time, to_time):
                 if mytime in choice.time_range():
