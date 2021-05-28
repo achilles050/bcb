@@ -162,6 +162,7 @@ class Booking(APIView):
             tel = request.data['phone']
             member = None
             exp = q_allcourtinfo.payment_guest_duration
+            refund_dur = timedelta(seconds=0)
 
         print(email)
         dt_now = timezone.make_aware(datetime.now())
