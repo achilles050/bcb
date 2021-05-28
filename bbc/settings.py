@@ -215,12 +215,12 @@ ALLOWED_HOSTS=['http://127.0.0.1:3000',
 # CSRF_COOKIE_SAMESITE = 'Lax'
 # SESSION_COOKIE_SAMESITE = 'Lax'
 
-# CORS_ALLOWED_ORIGINS = [
-#     'http://127.0.0.1:3000',
-#     'http://localhost:3000',
-#     'https://kittichat.github.io',
-#     '.heroku.com',
-# ]
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+    'https://kittichat.github.io',
+    '.heroku.com',
+]
 
 # SESSION_COOKIE_DOMAIN = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://kittichat.github.io',
 #                         '0.0.0.0']
