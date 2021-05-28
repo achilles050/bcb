@@ -229,6 +229,8 @@ CORS_ALLOW_CREDENTIALS = True
 # SESSION_COOKIE_DOMAIN = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://kittichat.github.io',
 #                         '0.0.0.0']
 
+SESSION_COOKIE_DOMAIN = 'http://localhost:3000'
+
 #SESSION_COOKIE_DOMAIN = 'http://localhost:8000'
 
 # SESSION_COOKIE_SAMESITE = None
