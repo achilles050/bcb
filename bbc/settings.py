@@ -214,7 +214,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'https://kittichat.github.io',
     '.heroku.com',
-    '0.0.0.0'
 ]
 
 # SESSION_COOKIE_DOMAIN = ['http://127.0.0.1:3000', 'http://localhost:3000', 'https://kittichat.github.io',
