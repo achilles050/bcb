@@ -1,0 +1,17 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin Festival Setting Page {% endblock %}
+{% block content %}
+<h1>Admin Festival Setting Page</h1>
+<h2>
+<ul>
+    {% for obj in object_list %}
+        <li>
+            <a href="{% url 'setting_festival_detail' pk=obj.pk %}">
+                {{ obj.fes_name }} from {{obj.fes_date_start}} to {{obj.fes_date_end}}
+            </a>
+        </li>
+    {% endfor %}
+<li/><a href="{% url 'setting_festival_add' %}">Add New Festival</a>
+</ul>
+</h2>
+{% endblock %}

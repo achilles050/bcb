@@ -14,7 +14,7 @@ import calendar
 from . import choice
 from . import form
 from booking import models as booking_models
-from booking.models import AllCourtInfo, EachCourtInfo
+from booking.models import AllCourtInfo, EachCourtInfo, FestivalInfo
 from booking import book
 from member import models as member_models
 from django.contrib.auth.models import User
@@ -112,6 +112,48 @@ class AllCourtSetting(PermissionRequiredMixin, View):
         return render(request, 'adminsite/setting_allcourt.html', {'form': myform})
 
 
+class FestivalSetting(PermissionRequiredMixin, ListView):
+    permission_required = 'is_staff'
+    login_url = '/adminsite/login/'
+
+    fields = ('__all__')
+    model = FestivalInfo
+    template_name = 'adminsite/setting_festival.html'
+    success_url = '/adminsite/setting/festival/'
+    ordering = ['fes_date_start', 'fes_date_end']
+
+
+class FestivalSettingDetail(PermissionRequiredMixin, UpdateView):
+    permission_required = 'is_staff'
+    login_url = '/adminsite/login/'
+
+    form_class = form.FestivalForm
+    model = FestivalInfo
+    template_name = 'adminsite/setting_festival_detail.html'
+    success_url = '/adminsite/setting/festival/'
+
+
+class AddFestival(PermissionRequiredMixin, CreateView):
+    permission_required = 'is_staff'
+    login_url = '/adminsite/login/'
+
+    
+    form_class = form.FestivalForm
+    model = FestivalInfo
+    template_name = 'adminsite/setting_festival_detail.html'
+    success_url = '/adminsite/setting/festival/'
+
+
+class DeleteFestival(PermissionRequiredMixin, DeleteView):
+    permission_required = 'is_staff'
+    login_url = '/adminsite/login/'
+
+    form_class = form.FestivalForm
+    model = FestivalInfo
+    template_name = 'adminsite/setting_festival_delete.html'
+    success_url = '/adminsite/setting/festival/'
+
+
 class EachCourtSetting(PermissionRequiredMixin, UpdateView):
     permission_required = 'is_staff'
     login_url = '/adminsite/login/'
@@ -122,6 +164,7 @@ class EachCourtSetting(PermissionRequiredMixin, UpdateView):
     slug_field = 'court_number'
     slug_url_kwarg = 'court_number'
     success_url = '/adminsite/setting/'
+    ordering = ['court_number']
 
 
 class AddCourt(PermissionRequiredMixin, CreateView):

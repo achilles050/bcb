@@ -9,10 +9,18 @@ urlpatterns = [
     path('login/', views.Login.as_view(), name='admin_login'),
     path('logout/', views.Logout),
     path('', views.AdminHome.as_view(), name='home'),
+
     path('setting/', views.SettingHome.as_view(), name='setting_home'),
+
     path('setting/add/', views.AddCourt.as_view(), name='add_court'),
     path('setting/allcourt/', views.AllCourtSetting.as_view(),
          name='allcourt_setting'),
+
+    path('setting/festival/add/', views.AddFestival.as_view(), name='setting_festival_add'),
+    path('setting/festival/<pk>/delete', views.DeleteFestival.as_view(), name='setting_festival_delete'),
+    path('setting/festival/', views.FestivalSetting.as_view(), name='setting_festival'),
+    path('setting/festival/<pk>/', views.FestivalSettingDetail.as_view(), name='setting_festival_detail'),
+
     path('setting/<court_number>/', views.EachCourtSetting.as_view(),
          name='eachcourt_setting'),
     path('setting/<court_number>/delete/', views.DeleteCourt.as_view(),

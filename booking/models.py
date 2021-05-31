@@ -29,6 +29,13 @@ class AllCourtInfo(models.Model):
     announce = models.CharField(max_length=1000)  # for annouce information
     contacts = models.CharField(max_length=500)  # for contacts
     rules = models.CharField(max_length=1000)  # store rule when go to court
+
+
+class FestivalInfo(models.Model):
+    class Meta:
+        db_table = 'bcb_festivalinfo'
+
+    fes_name = models.CharField(max_length=100)
     fes_date_start = models.DateField(null=True)
     fes_date_end = models.DateField(null=True)
     payment_member_duration_fes = models.DurationField(null=True)

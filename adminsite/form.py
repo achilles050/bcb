@@ -1,6 +1,6 @@
 from django import forms
 from django.utils import timezone
-from booking.models import AllCourtInfo, EachCourtInfo, Payment
+from booking.models import AllCourtInfo, EachCourtInfo, Payment, FestivalInfo
 from member.models import Member
 from datetime import timedelta, time, datetime
 
@@ -15,16 +15,12 @@ class AllCourtForm(forms.ModelForm):
             'announce': forms.Textarea(),
             'contacts': forms.Textarea(),
             'rules': forms.Textarea(),
-            'fes_date_start': forms.SelectDateWidget(),
-            'fes_date_end': forms.SelectDateWidget()
         }
         labels = {
             'num_of_creategroup': 'Number of create group',
             'announce': 'Announce',
             'contacts': 'Contacts',
             'rules': 'Rules',
-            'fes_date_start': 'Festival Date Start',
-            'fes_date_end': 'Festival Date End'
         }
 
     range_booking = forms.ChoiceField(
@@ -84,6 +80,17 @@ class AllCourtForm(forms.ModelForm):
         label='Refund before ... for member'
     )
 
+
+class FestivalForm(forms.ModelForm):
+    class Meta:
+        model = FestivalInfo
+        fields = ('__all__')
+        widgets = {
+            'fes_date_start': forms.SelectDateWidget(),
+            'fes_date_end': forms.SelectDateWidget(),
+        }
+
+
     payment_member_duration_fes = forms.ChoiceField(
         choices=[
             (timedelta(minutes=1), "1 min"),
@@ -106,7 +113,6 @@ class AllCourtForm(forms.ModelForm):
         ],
         label='Refund before ... for member in Festival time'
     )
-
 
 class EachCourtForm(forms.ModelForm):
     class Meta:

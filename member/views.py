@@ -55,10 +55,7 @@ class Index(APIView):
         return JsonResponse({'announce': announce, 
                              'contacts': contacts, 
                              'rules': rules, 
-                             'member': str(request.user),
-                             'time': timezone.make_aware(datetime.now()),
-                             'time2': timezone.make_aware(datetime.now()).strftime("%H:%M"),
-                             'timezone': timezone.make_naive(timezone.now())
+                             'member': str(request.user)
                              })
 
 

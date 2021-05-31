@@ -4,6 +4,7 @@
 <ul>
 <h1>
 <li/><a href="{% url 'allcourt_setting' %}">All Court Setting</a>
+<li/><a href="{% url 'setting_festival' %}">Festival Date Setting</a>
 {% for id in court_number%}
 <li/><a href="{% url 'eachcourt_setting' court_number=id %}">Court {{id}}</a>
 {% endfor %}

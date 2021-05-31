@@ -1,0 +1,10 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin {{ object.fes_name }} Setting Page {% endblock %}
+{% block content %}
+<h1>Admin {{ object.fes_name }} Setting Page</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete "Festival: {{ object.fes_name }}"?</p>
+    <input type="submit" value="Confirm">
+</form>
+{% endblock %}

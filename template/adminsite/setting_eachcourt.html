@@ -18,7 +18,7 @@
 {% if form.court_number.value is not None %}
 <center/>
 <a href="{% url 'delete_court' court_number=form.court_number.value %}">
-    Delete "Court id"
+    Delete "Court {{ form.court_number.value }}"
 </a>
 {% endif %}
 {% endblock %}

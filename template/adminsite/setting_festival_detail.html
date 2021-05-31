@@ -1,0 +1,18 @@
+{% extends 'adminsite/base_admin.html' %}
+{% block title %} Admin Festival Setting Page {% endblock %}
+{% block content %}
+<h2>Admin Festival Setting Page</h2>
+<form method="post">
+    <table class='center'>
+    {% csrf_token %} 
+    {{ form.as_table }} 
+    </table>
+    <input type="submit" value="Save"> 
+</form>
+{% if form.fes_name.value is not None %}
+<center/>
+<a href="{% url 'setting_festival_delete' pk=object.id %}">
+    Delete "{{ form.fes_name.value }}"
+</a>
+{% endif %}
+{% endblock %}

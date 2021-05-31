@@ -142,6 +142,7 @@ class Booking(APIView):
         all_ds_mem = 0
 
         q_allcourtinfo = models.AllCourtInfo.objects.all()[0]
+        q_fes = models.FestivalInfo.objects.all()
         fes_start = q_allcourtinfo.fes_date_start
         fes_end = q_allcourtinfo.fes_date_end
 
@@ -150,10 +151,16 @@ class Booking(APIView):
             email = request.user.email
             tel = mem_models.Member.objects.get(username=request.user).tel
             member = mem_models.Member.objects.get(username=request.user)
-            if booking_date >= fes_start and booking_date <= fes_end:
-                exp = q_allcourtinfo.payment_member_duration_fes
-                refund_dur = q_allcourtinfo.refund_member_duration_fes
-            else:
+            in_fes = False
+            for fes_obj in q_fes:
+                fes_start = fes_obj.fes_date_start
+                fes_end = fes_obj.fes_date_end
+                if booking_date >= fes_start and booking_date <= fes_end:
+                    exp = fes_obj.payment_member_duration_fes
+                    refund_dur = fes_obj.refund_member_duration_fes
+                    in_fes = True
+
+            if not in_fes:
                 exp = q_allcourtinfo.payment_member_duration
                 refund_dur = q_allcourtinfo.refund_member_duration
         else:
