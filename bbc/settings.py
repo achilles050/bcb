@@ -115,23 +115,23 @@ WSGI_APPLICATION = 'bbc.wsgi.application'
 # }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dborm4uhis5f4a',
-        'USER': 'rzpcqfieiulxgq',
-        'PASSWORD': '422352329e161dd31b60eca4c5dd88f48ccc478fb3d37cbeb95edd162c6972fc',
-        'HOST': 'ec2-3-214-136-47.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR+'/'+'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dborm4uhis5f4a',
+#         'USER': 'rzpcqfieiulxgq',
+#         'PASSWORD': '422352329e161dd31b60eca4c5dd88f48ccc478fb3d37cbeb95edd162c6972fc',
+#         'HOST': 'ec2-3-214-136-47.compute-1.amazonaws.com',
+#         'PORT': '5432',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR+'/'+'db.sqlite3',
+    }
+}
 
 
 
@@ -198,8 +198,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 #                 'https://kittichat.github.io',
 #                 '.heroku.com',]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 
