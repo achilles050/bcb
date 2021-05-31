@@ -198,8 +198,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 #                 'https://kittichat.github.io',
 #                 '.heroku.com',]
 
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 
