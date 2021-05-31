@@ -114,19 +114,6 @@ WSGI_APPLICATION = 'bbc.wsgi.application'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'sql6414819',
-#         'HOST': 'sql6.freemysqlhosting.net',
-#         'USER': 'sql6414819',
-#         'PASSWORD': '1f4WjUCwaS',
-#         'PORT': 3306,
-#         'OPTIONS': {
-#             'sql_mode': 'traditional',
-#         },
-#     }
-# }
 
 # DATABASES = {
 
