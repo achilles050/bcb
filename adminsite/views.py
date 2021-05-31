@@ -294,6 +294,15 @@ class DetailBooking(PermissionRequiredMixin, UpdateView):
     template_name = 'adminsite/booking_detail.html'
     success_url = '/adminsite/booking/'
 
+    def get_form(self, form_class=None):
+        form = super(DetailBooking, self).get_form(form_class)
+        form.fields['group'].required = False
+        form.fields['exp_datetime'].required = False
+        form.fields['refund_datetime'].required = False
+        form.fields['paymentid'].required = False
+        form.fields['refundid'].required = False
+        return form
+
 
 class ListMember(ListView):
     permission_required = 'is_staff'
