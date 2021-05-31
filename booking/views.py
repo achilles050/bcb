@@ -873,14 +873,13 @@ class History(APIView):
             booking_list[i]['number'] = i+1
             if booking_q[i].payment_state == 0:
                 booking_list[i]['state'] = 'booking'
-                booking_list[i]['timeout'] = timezone.make_aware(booking_q[i].exp_datetime).strftime(
-                    "%d-%m-%Y %H:%M")
+                booking_list[i]['timeout'] = booking_q[i].exp_datetime
                 booking_list[i]['action'] = ['pay', 'cancel']
             elif booking_q[i].payment_state == 1:
                 booking_list[i]['state'] = 'success'
                 if booking_q[i].refund_datetime > dt_now:
-                    booking_list[i]['timeout'] = timezone.make_aware((
-                        booking_q[i].refund_datetime)).strftime("%d-%m-%Y %H:%M")
+                    booking_list[i]['timeout'] = (
+                        booking_q[i].refund_datetime).strftime("%d-%m-%Y %H:%M")
                     booking_list[i]['action'] = ['refund']
                 else:
                     booking_list[i]['timeout'] = None
