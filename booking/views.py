@@ -167,6 +167,7 @@ class Booking(APIView):
         print(email)
         dt_now = timezone.make_aware(datetime.now())
         dt_exp = dt_now + exp
+        print(dt_now)
 
         for value in booking:
             court = int(value['column'][5:])
