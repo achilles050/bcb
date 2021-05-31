@@ -1,5 +1,6 @@
 import json
 from datetime import time, timedelta, date
+from datetime import timezone as tz
 from uuid import uuid4
 import calendar
 import urllib.parse
@@ -873,7 +874,7 @@ class History(APIView):
             booking_list[i]['number'] = i+1
             if booking_q[i].payment_state == 0:
                 booking_list[i]['state'] = 'booking'
-                booking_list[i]['timeout'] = booking_q[i].exp_datetime
+                booking_list[i]['timeout'] = booking_q[i].exp_datetime.astimezone(tz.utc).strftime("%d-%m-%Y %H:%M")
                 booking_list[i]['action'] = ['pay', 'cancel']
             elif booking_q[i].payment_state == 1:
                 booking_list[i]['state'] = 'success'
