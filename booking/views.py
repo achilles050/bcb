@@ -873,7 +873,7 @@ class History(APIView):
             booking_list[i]['number'] = i+1
             if booking_q[i].payment_state == 0:
                 booking_list[i]['state'] = 'booking'
-                booking_list[i]['timeout'] = booking_q[i].exp_datetime.strftime("%d-%m-%Y %H:%M %Z")
+                booking_list[i]['timeout'] = booking_q[i].exp_datetime.strftime("%d-%m-%Y %H:%M %z")
                 booking_list[i]['action'] = ['pay', 'cancel']
             elif booking_q[i].payment_state == 1:
                 booking_list[i]['state'] = 'success'
