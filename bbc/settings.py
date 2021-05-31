@@ -160,9 +160,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
 
-# TIME_ZONE = 'Asia/Bangkok'
+TIME_ZONE = 'Asia/Bangkok'
 
 USE_I18N = True
 
@@ -198,8 +198,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 #                 'https://kittichat.github.io',
 #                 '.heroku.com',]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 

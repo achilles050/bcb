@@ -52,7 +52,14 @@ class Index(APIView):
         announce = info.announce
         contacts = info.contacts
         rules = info.rules
-        return JsonResponse({'announce': announce, 'contacts': contacts, 'rules': rules, 'member': str(request.user)})
+        return JsonResponse({'announce': announce, 
+                             'contacts': contacts, 
+                             'rules': rules, 
+                             'member': str(request.user),
+                             'time': timezone.make_aware(datetime.now()),
+                             'time2': timezone.make_aware(datetime.now()).strftime("%H:%M"),
+                             'timezone': timezone.make_naive(timezone.now())
+                             })
 
 
 class Register(APIView):
@@ -125,9 +132,6 @@ class Login(APIView):
         auth = authenticate(username=username, password=password)
         if auth is not None:
             login(request, auth)
-            # res = JsonResponse({'username': username}, status=200)
-            # res.cookies['sessionid'].update({"samesite": "None"})
-            # return res
             return JsonResponse({'username': username}, status=200)
         else:
             return JsonResponse({'message': 'try again'}, status=404)
@@ -139,7 +143,6 @@ def Logout(request):
         logout(request)
         print('logouted')
         return JsonResponse({'msg': 'logout successfully'}, status=200)
-        # return HttpResponse('ok logouted')
     except Exception as e:
         print(e)
         return JsonResponse({'msg': 'error'}, status=404)
