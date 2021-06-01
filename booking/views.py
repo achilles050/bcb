@@ -143,8 +143,7 @@ class Booking(APIView):
 
         q_allcourtinfo = models.AllCourtInfo.objects.all()[0]
         q_fes = models.FestivalInfo.objects.all()
-        fes_start = q_allcourtinfo.fes_date_start
-        fes_end = q_allcourtinfo.fes_date_end
+
 
         if request.user.id is not None:
             name = request.user.first_name
