@@ -1,12 +1,20 @@
 {% extends 'adminsite/base_admin.html' %}
+
 {% block title %} Admin Setting All Court Page {% endblock %}
+
+{% load crispy_forms_tags %}
+
 {% block content %}
-<h1>Admin Setting All Court</h1>
+
+<h2>การตั้งค่าสนามทั้งหมด</h2>
+
 <form method="post"> 
-    <table class='center'>
+    
     {% csrf_token %} 
-    {{ form.as_table }} 
-    </table>
-    <input type="submit" value="Save"> 
+
+    {{ form|crispy }} 
+
+    <input type="submit" value="บันทึก" class="btn btn-success"> 
 </form>
+
 {% endblock %}

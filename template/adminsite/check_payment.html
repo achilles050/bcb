@@ -1,15 +1,17 @@
 {% extends 'adminsite/base_admin.html' %}
+
 {% block title %} Admin Check Payment Page {% endblock %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-<h1>Check Payment Page</h1>
+<h1>ตรวจสอบการชำระเงิน</h1>
 <form action="{% url 'check_payment' %}" method="POST">
-    <table>
+    <table class="table">
         <tr>
             <td>PaymentID</td>
             <td>DateTime</td>
             <td>Price</td>
-            <td></td>
-            <td>State</td>
+            <td colspan="2"><center/>State</td>
         </tr>
         {% for payment in form %}
         <tr>
@@ -24,6 +26,8 @@
             </td>
             <td>
                     <button type="submit" formmethod="post" name="found" value="{{ payment.paymentid }}">Found</button>
+            </td>
+            <td>
                     <button type="submit" formmethod="post" name="not_found" value="{{ payment.paymentid }}">Not Found</button>
             </td>
             <td>

@@ -1,18 +1,18 @@
 {% extends 'adminsite/base_admin.html' %}
 {% block title %} Admin Home Page {% endblock %}
 {% block content %}
-<ul>
+<p style="font-size: 50px; text-align: center;">การจัดการระบบจองสนามแบดมินตัน<br/></p>
 <h1>
-<li/><a href="{% url 'setting_home' %}">Court Setting</a>
-<li/><a href="{% url 'admin_booking' %}">Booking</a>
-<li/><a href="{% url 'booking' %}">Booking History</a>
-<li/><a href="{% url 'member' %}">Member</a>
-<li/><a href="{% url 'group' %}">Group</a>
-<li/><a href="{% url 'check_payment' %}">Check Payment</a>
-<li/><a href="{% url 'check_refund' %}">Check Refund</a>
-<li/><a href="{% url 'income_home' %}">Income</a>
-<li/><a href="{% url 'usage_home' %}">Usage</a>
-<li/><a href="{% url 'admin_register' %}">Register</a>
+<a href="{% url 'setting_home' %}">การตั้งค่าสนาม</a><br/>
+<a href="{% url 'admin_booking' %}">การจองสนาม</a><br/>
+<a href="{% url 'booking' %}">ประวัติการจองทั้งหมด</a><br/>
+<a href="{% url 'member' %}">สมาชิก</a><br/>
+<a href="{% url 'group' %}">กลุ่ม</a><br/>
+<a href="{% url 'check_payment' %}">ตรวจสอบการชำระเงิน</a><br/>
+<a href="{% url 'check_refund' %}">ตรวจสอบการขอคืนเงิน</a><br/>
+<a href="{% url 'income_home' %}">รายได้</a><br/>
+<a href="{% url 'usage_home' %}">ยอดการเล่นในแต่ละเวลา</a><br/>
+<a href="{% url 'admin_register' %}">สมัครบัญชีผู้ดูแล</a><br/>
 </h1>
-</ul>
+
 {% endblock %}

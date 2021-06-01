@@ -1,12 +1,16 @@
 {% extends 'adminsite/base_admin.html' %}
+
 {% block title %} Admin Booking Page for walkthough booking {% endblock %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-<h1>Admin Booking Page for walkthough booking</h1>
+
+<h2>จองสนามสำหรับ walkthough </h2>
 <form method="post" > 
-    <table class='center'>
+
     {% csrf_token %} 
-    {{ form.as_table }} 
+    {{ form | crispy }} 
     </table>
-    <input type="submit" value="Save"> 
+    <input type="submit" value="บันทึก" class="btn btn-success"> 
 </form>
 {% endblock %}

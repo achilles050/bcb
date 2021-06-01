@@ -331,8 +331,8 @@ class ListBooking(PermissionRequiredMixin, ListView):
 class DetailBooking(PermissionRequiredMixin, UpdateView):
     permission_required = 'is_staff'
     login_url = '/adminsite/login/'
-    fields = ('__all__')
-    # form_class = form.MemberForm
+    # fields = ('__all__')
+    form_class = form.BookingForm
     model = booking_models.Booking
     template_name = 'adminsite/booking_detail.html'
     success_url = '/adminsite/booking/'
@@ -386,8 +386,8 @@ class DetailGroup(PermissionRequiredMixin, UpdateView):
     permission_required = 'is_staff'
     login_url = '/adminsite/login/'
 
-    # form_class = form.MemberForm
-    fields = ('__all__')
+    form_class = form.GroupForm
+    # fields = ('__all__')
     model = member_models.Group
     template_name = 'adminsite/group_detail.html'
     success_url = '/adminsite/group/'

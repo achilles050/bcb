@@ -54,6 +54,9 @@ class EachCourtInfo(models.Model):
     time_ds_end = models.TimeField()
     is_maintain = models.BooleanField(default=False)
 
+    def __str__(self):
+        return str(self.court_number)
+
 
 class Booking(models.Model):
     class Meta:

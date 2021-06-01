@@ -1,12 +1,15 @@
 {% extends 'adminsite/base_admin.html' %}
+
 {% block title %} Admin Member Detail Page {% endblock %}
+{% load crispy_forms_tags %}
+
 {% block content %}
-<h2>Member</h2>
+<h2>ข้อมูลสมาชิก</h2>
 <form method="post">
     <table class='center'>
     {% csrf_token %} 
-    {{ form.as_table }} 
+    {{ form | crispy }} 
     </table>
-    <input type="submit" value="Save"> 
+    <input type="submit" value="บันทึก" class="btn btn-success"> 
 </form>
 {% endblock %}

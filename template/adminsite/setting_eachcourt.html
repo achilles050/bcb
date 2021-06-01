@@ -1,24 +1,27 @@
 {% extends 'adminsite/base_admin.html' %}
+
 {% block title %} Admin Setting Court {{ form.court_number.value }} Page {% endblock %}
+{% load crispy_forms_tags %}
+
 {% block content %}
 
 {% if form.court_number.value is not None %}
-    <h1>Admin Setting Court {{ form.court_number.value }}</h1>
+    <h1>ตั้งค่าสนาม {{ form.court_number.value }}</h1>
 {% else %}
-    <h1>Admin Add Court</h1>
+    <h1>เพิ่มสนาม</h1>
 {% endif %}
 
 <form method="post">
-    <table class='center'>
+
     {% csrf_token %} 
-    {{ form.as_table }} 
-    </table>
-    <input type="submit" value="Save"> 
+    {{ form | crispy }} 
+
+    <input type="submit" value="ยืนยัน" class="btn btn-success"> 
 </form>
 {% if form.court_number.value is not None %}
 <center/>
 <a href="{% url 'delete_court' court_number=form.court_number.value %}">
-    Delete "Court {{ form.court_number.value }}"
+    ลบ "สนาม {{ form.court_number.value }}"
 </a>
 {% endif %}
 {% endblock %}
