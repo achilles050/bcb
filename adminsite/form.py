@@ -175,7 +175,7 @@ class MemberForm(forms.ModelForm):
         }
 
 
-class BookingForm(forms.ModelForm):
+class BookingDetailForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ('__all__')

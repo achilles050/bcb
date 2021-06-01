@@ -204,7 +204,8 @@ class AdminBooking(PermissionRequiredMixin, View):
             to_time = time(dt_now.hour)
         data = {'date': mydate, 'from_time': from_time,
                 'to_time': to_time}
-        myform = form.BookingForm(initial=data)
+        # myform = form.BookingForm(initial=data)
+        myform = form.BookingForm()
         myform.fields['date'].choices = choice.date_choices
         myform.fields['from_time'].choices = choice.time_choices
         myform.fields['to_time'].choices = choice.time_choices2
@@ -277,11 +278,12 @@ class AdminBooking(PermissionRequiredMixin, View):
                         member=None,
                         court=q_court,
                         booking_datetime=booking_datetime,
-                        exp_datetime=dt_exp,
+                        exp_datetime=None,
                         price_normal=price_normal,
                         price_ds=ds_mem+ds_time,
                         price_pay=price_normal-ds_mem-ds_time,
-                        bookingid=bookingid)
+                        bookingid=bookingid,
+                        payment_state=1)
 
                     if booking_created:
                         booking_obj_list.append(booking_obj)
@@ -332,7 +334,7 @@ class DetailBooking(PermissionRequiredMixin, UpdateView):
     permission_required = 'is_staff'
     login_url = '/adminsite/login/'
     # fields = ('__all__')
-    form_class = form.BookingForm
+    form_class = form.BookingDetailForm
     model = booking_models.Booking
     template_name = 'adminsite/booking_detail.html'
     success_url = '/adminsite/booking/'
