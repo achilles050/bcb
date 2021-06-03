@@ -44,9 +44,9 @@ class Member(User):
         db_table = 'bcb_member'
     user_ptr = models.OneToOneField(auto_created=True, on_delete=models.CASCADE,
                                     parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL, db_constraint=False)
-    tel = models.CharField(max_length=10)
+    tel = models.CharField(max_length=10, null=True)
     birthday = models.DateField(null=True)
-    gender = models.CharField(max_length=10)
+    gender = models.CharField(max_length=10, null=True)
     # for show in creategroup request
     public = models.BooleanField(default=True)
     virtualid = models.CharField(
