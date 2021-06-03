@@ -198,7 +198,7 @@ class BookingDetailForm(forms.ModelForm):
             'timestamp': 'เวลาที่จอง',
             'bookingid': 'bookingID',
             'paymentid': 'paymentID',
-            'refundid': 'เrefundID',
+            'refundid': 'refundID',
             'is_deleted': 'ลบการจองนี้',
         }
 

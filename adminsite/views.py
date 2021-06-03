@@ -7,6 +7,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, ListView, D
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.template.loader import render_to_string
 from uuid import uuid4
 from datetime import timedelta, datetime, time, date
 import calendar
@@ -242,8 +243,6 @@ class AdminBooking(PermissionRequiredMixin, View):
 
             from_time = datetime.strptime(from_time, '%H:%M:%S').hour
             to_time = datetime.strptime(to_time, '%H:%M:%S').hour
-            # from_time = int(from_time[:2])
-            # to_time = int(to_time[:2])
             booking_time = []
             for mytime in range(from_time, to_time):
                 if mytime in choice.time_range():
@@ -302,16 +301,64 @@ class AdminBooking(PermissionRequiredMixin, View):
                         value.delete()
                 return JsonResponse({'success': False})
             else:
+                all_bookingid = []
+                for value in booking_obj_list:
+                    all_bookingid.append(value.bookingid)
                 response_dict = dict()
                 response_dict['success'] = True
-                response_dict['bookingid'] = [
-                    value.bookingid for value in booking_obj_list]
+                response_dict['bookingid'] = all_bookingid
                 response_dict['price'] = {}
                 response_dict['price']['normal_price'] = all_price_normal
                 response_dict['price']['discount_time'] = all_ds_time
                 response_dict['price']['discount_member'] = all_ds_mem
                 response_dict['price']['pay'] = all_price_normal - \
                     all_ds_time-all_ds_mem
+                booking_obj_list = []
+                pay = 0    
+                for bookingid in all_bookingid:
+                    now = timezone.make_aware(datetime.now())
+                    q_bookingid = booking_models.Booking.objects.filter(bookingid=bookingid).exists()
+
+                    if q_bookingid:
+                        q_booking = booking_models.Booking.objects.get(bookingid=bookingid)
+                        pay += q_booking.price_pay
+                        booking_obj_list.append(q_booking)
+                    else:
+                        return JsonResponse({'message': f'error bookingid {bookingid} not available', 'success': False}, status=404)
+                while True:
+                    payment_obj, payment_created = booking_models.Payment.objects.get_or_create(
+                        paymentid=uuid4().hex,
+                        pay=pay,
+                        member=None,
+                        group=None)
+                    if payment_created:
+                        break
+
+                if payment_created:
+                    for value in booking_obj_list:
+                        value.payment_state = 1
+                        value.paymentid = payment_obj.paymentid
+                        value.exp_datetime = None
+                        value.save()
+                    email = booking_obj_list[0].email
+                    print(email)
+                    html = render_to_string('booking_success.html', {'object': booking_obj_list,
+                                                                    'paymentid': payment_obj.paymentid})
+                    try:                                                 
+                        send_mail(
+                            'Booking Badminton Court Successfully',
+                            message=None,
+                            html_message=html,
+                            recipient_list=[email],
+                            from_email=None,
+                            fail_silently=False,
+                        )
+                    except:
+                        print('SMTPAuth Error')
+                        pass
+
+                response_dict['paymentid'] = payment_obj.paymentid               
+
                 return JsonResponse(response_dict)
 
         return render(request, 'adminsite/booking.html', {'form': myform})

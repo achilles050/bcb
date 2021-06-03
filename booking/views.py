@@ -678,14 +678,18 @@ class Payment(APIView):
             print(email)
             html = render_to_string('booking_success.html', {'object': booking_obj_list,
                                                              'paymentid': payment_obj.paymentid})
-            send_mail(
-                'Booking Badminton Court Successfully',
-                message=None,
-                html_message=html,
-                recipient_list=[email],
-                from_email=None,
-                fail_silently=False,
-            )
+            try:                                                 
+                send_mail(
+                    'Booking Badminton Court Successfully',
+                    message=None,
+                    html_message=html,
+                    recipient_list=[email],
+                    from_email=None,
+                    fail_silently=False,
+                )
+            except:
+                print('SMTPAuth Error')
+                pass
 
             return JsonResponse({'message': 'confirm success', 'success': True})
         else:
